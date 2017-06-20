@@ -26,9 +26,8 @@ public class Scene extends JPanel {
     private int yPerso;
     private int dx;
     private int dy;
-    public int timer=0;
-    private int tab[][];
-    private int test=-1;
+    public int timer = 0;
+    private int test = -1;
     private ArrayList arl;
     public ArrayList<Block> tabObject = new ArrayList<Block>();
     BDD bdd;
@@ -46,27 +45,26 @@ public class Scene extends JPanel {
         bdd = new BDD("mysql", "5.135.194.4", "MAP1", "root", "root66");
         bdd.Connection();
         arl = bdd.getTMap(1);
-        tab = new int[Main.height / 32][Main.width / 32];
         for (int i = 0; i < Main.height / 32; i++) {
             for (int j = 0; j < Main.width / 32; j++) {
                 test++;
-                switch (Integer.valueOf((String) arl.get(test)).intValue()){
+                switch (Integer.valueOf((String) arl.get(test)).intValue()) {
                     case 1:
-                        tabObject.add(new Dirt(1,i,j));
+                        tabObject.add(new Dirt(1, i, j));
                         break;
                     case 2:
-                        tabObject.add(new Stone(2,i,j));
+                        tabObject.add(new Stone(2, i, j));
                         break;
                     case 3:
-                        tabObject.add(new Diamond(3,i,j));
+                        tabObject.add(new Diamond(3, i, j));
                         break;
                     case 4:
-                        tabObject.add(new Brick(4,i,j));
+                        tabObject.add(new Brick(4, i, j));
                         break;
                     case 5:
-                        tabObject.add(new Door(5,i,j));
-                        break;}
-
+                        tabObject.add(new Door(5, i, j));
+                        break;
+                }
 
 
             }
@@ -123,43 +121,35 @@ public class Scene extends JPanel {
         this.setDy(0);
         this.setDx(0);
         g2.drawImage(this.imgFond, 0, 0, null);
-        test=1;
-        for (int i = 0; i < Main.height / 32; i++) {
-            for (int j = 0; j < (Main.width / 32); j++) {
                 for (Block n : tabObject) {
-                    switch (n.id){
-                    case 0:
-                        test++;
-                        break;
-                    case 1:
-                        g2.drawImage(this.imgDirt, j * 32, i * 32, null);
-                        test++;
-                        break;
-                    case 2:
-                        g2.drawImage(this.imgStone, j * 32, i * 32, null);
-                        test++;
-                        break;
-                    case 3:
-                        g2.drawImage(this.imgDiams, j * 32, i * 32, null);
-                        test++;
-                        break;
-                    case 4:
-                        g2.drawImage(this.imgBrick, j * 32, i * 32, null);
-                        test++;
-                        break;
-                    default:
-                        test++;
-                        //System.out.print(tab[i][j]);
-                        break;
+                    switch (n.id) {
+                        case 0:
+                            break;
+                        case 1:
+                            g2.drawImage(this.imgDirt, n.y * 32, n.x * 32, null);
+                            break;
+                        case 2:
+                            g2.drawImage(this.imgStone, n.y  * 32, n.x* 32, null);
+                            break;
+                        case 3:
+                            g2.drawImage(this.imgDiams, n.y  * 32, n.x * 32, null);
+                            break;
+                        case 4:
+                            g2.drawImage(this.imgBrick, n.y  * 32, n.x * 32, null);
+                            break;
+                        default:
 
-                }}
+                            break;
 
-                g2.drawImage(this.imgPerso, xPerso, yPerso, null);
+
 
             }
-
         }
-        if(dx == -32){
+        g2.drawImage(this.imgPerso, xPerso, yPerso, null);
+
+
+        if (dx == -32) {
             System.out.print(dx);
         }
-    }}
+    }
+}
